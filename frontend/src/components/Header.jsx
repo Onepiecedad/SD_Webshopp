@@ -17,38 +17,38 @@ const Header = ({ cartCount }) => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-md">
+    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-premium border-b border-gray-100">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-24">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group">
+          <Link to="/" className="flex items-center gap-4 group">
             <img
               src="https://customer-assets.emergentagent.com/job_99647620-aa0d-48cd-947c-c21a78f050c5/artifacts/ekb3cgx0_a2324df2-849a-44a3-b779-1569a30de3ac.png"
               alt="SD Skåne"
-              className="w-12 h-12 object-contain transition-transform duration-300 group-hover:scale-110"
+              className="w-14 h-14 object-contain transition-transform duration-500 group-hover:scale-110 group-hover:rotate-12"
             />
             <div>
-              <h1 className="text-xl font-bold text-[#1a237e]">SD Skånebutiken</h1>
-              <p className="text-xs text-gray-600">För ett bättre Sverige</p>
+              <h1 className="text-2xl font-bold text-[#1a237e] tracking-tight">SD Skånebutiken</h1>
+              <p className="text-xs text-gray-600 font-medium">För ett bättre Sverige</p>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-10">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`text-lg font-medium transition-colors duration-300 relative ${
+                className={`text-lg font-semibold transition-all duration-300 relative group ${
                   isActive(link.path)
                     ? 'text-[#1a237e]'
                     : 'text-gray-600 hover:text-[#1a237e]'
                 }`}
               >
                 {link.name}
-                {isActive(link.path) && (
-                  <span className="absolute -bottom-2 left-0 right-0 h-0.5 bg-[#1a237e]"></span>
-                )}
+                <span className={`absolute -bottom-2 left-0 right-0 h-0.5 bg-[#1a237e] transition-all duration-300 ${
+                  isActive(link.path) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+                }`}></span>
               </Link>
             ))}
           </nav>
@@ -59,11 +59,11 @@ const Header = ({ cartCount }) => {
               <Button
                 variant="ghost"
                 size="icon"
-                className="relative hover:bg-blue-50 transition-colors"
+                className="relative hover:bg-blue-50 transition-all duration-300 w-12 h-12 rounded-xl"
               >
                 <ShoppingCart className="w-6 h-6 text-[#1a237e]" />
                 {cartCount > 0 && (
-                  <Badge className="absolute -top-1 -right-1 w-5 h-5 flex items-center justify-center p-0 bg-red-500 hover:bg-red-600 text-white text-xs">
+                  <Badge className="absolute -top-1 -right-1 w-6 h-6 flex items-center justify-center p-0 bg-red-500 hover:bg-red-600 text-white text-xs font-bold border-2 border-white">
                     {cartCount}
                   </Badge>
                 )}
@@ -74,7 +74,7 @@ const Header = ({ cartCount }) => {
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden hover:bg-blue-50"
+              className="md:hidden hover:bg-blue-50 w-12 h-12 rounded-xl transition-all duration-300"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               {mobileMenuOpen ? (
@@ -88,16 +88,16 @@ const Header = ({ cartCount }) => {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <nav className="md:hidden py-4 border-t">
-            <div className="flex flex-col gap-2">
+          <nav className="md:hidden py-6 border-t">
+            <div className="flex flex-col gap-3">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
                   to={link.path}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`px-4 py-3 rounded-lg text-lg font-medium transition-all duration-300 ${
+                  className={`px-6 py-4 rounded-xl text-lg font-semibold transition-all duration-300 ${
                     isActive(link.path)
-                      ? 'bg-[#1a237e] text-white'
+                      ? 'bg-[#1a237e] text-white shadow-lg'
                       : 'text-gray-700 hover:bg-gray-100'
                   }`}
                 >
