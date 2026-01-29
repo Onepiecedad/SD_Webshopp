@@ -168,19 +168,19 @@ const Home = ({ addToCart }) => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-[#1a237e] to-[#283593] text-white relative overflow-hidden">
+      <section className="py-28 bg-gradient-to-br from-[#1a237e] to-[#283593] text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 left-0 w-96 h-96 bg-blue-300 rounded-full blur-3xl"></div>
           <div className="absolute bottom-0 right-0 w-96 h-96 bg-yellow-300 rounded-full blur-3xl"></div>
         </div>
         <div className="container mx-auto px-4 text-center relative z-10">
-          <h2 className="text-4xl lg:text-5xl font-bold mb-6">Behöver du kampanjmaterial?</h2>
-          <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+          <h2 className="premium-heading text-5xl lg:text-6xl mb-8">Behöver du kampanjmaterial?</h2>
+          <p className="text-xl text-blue-100 mb-12 max-w-3xl mx-auto font-light leading-relaxed">
             Vi erbjuder volymrabatter för större beställningar. Perfekt för kampanjer och event!
           </p>
           <Button 
             size="lg" 
-            className="bg-[#ffd700] hover:bg-[#ffed4e] text-[#1a237e] font-semibold text-lg px-8 py-6 transition-all duration-300 hover:scale-105 hover:shadow-xl"
+            className="bg-[#ffd700] hover:bg-[#ffed4e] text-[#1a237e] font-semibold text-lg px-12 py-7 transition-all duration-500 hover:scale-105 hover:shadow-2xl shine-effect rounded-xl"
             asChild
           >
             <Link to="/kontakt">Kontakta oss för offert</Link>
