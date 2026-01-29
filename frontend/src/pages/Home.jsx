@@ -18,31 +18,31 @@ const Home = ({ addToCart }) => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-[#1a237e] via-[#283593] to-[#1a237e] text-white py-24 lg:py-32 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-[#1a237e] via-[#283593] to-[#1a237e] text-white py-32 lg:py-40 overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-20 left-20 w-64 h-64 bg-blue-300 rounded-full blur-3xl"></div>
           <div className="absolute bottom-20 right-20 w-96 h-96 bg-yellow-300 rounded-full blur-3xl"></div>
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="flex justify-center mb-8">
+          <div className="max-w-5xl mx-auto text-center">
+            <div className="flex justify-center mb-12">
               <img 
                 src="https://customer-assets.emergentagent.com/job_99647620-aa0d-48cd-947c-c21a78f050c5/artifacts/ekb3cgx0_a2324df2-849a-44a3-b779-1569a30de3ac.png" 
                 alt="SD Skåne" 
-                className="w-32 h-32 object-contain animate-float"
+                className="w-40 h-40 object-contain animate-float drop-shadow-2xl"
               />
             </div>
-            <h1 className="text-5xl lg:text-7xl font-bold mb-6 leading-tight">
+            <h1 className="premium-heading text-6xl lg:text-8xl mb-8 leading-tight tracking-tight">
               SD Skånebutiken
             </h1>
-            <p className="text-xl lg:text-2xl mb-8 text-blue-100 max-w-2xl mx-auto">
+            <p className="text-xl lg:text-2xl mb-12 text-blue-100 max-w-3xl mx-auto font-light leading-relaxed">
               Välkommen till vår officiella webbutik för profilprodukter och kläder
             </p>
-            <div className="flex flex-wrap gap-4 justify-center">
+            <div className="flex flex-wrap gap-6 justify-center">
               <Button 
                 size="lg" 
-                className="bg-[#ffd700] hover:bg-[#ffed4e] text-[#1a237e] font-semibold text-lg px-8 py-6 transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                className="bg-[#ffd700] hover:bg-[#ffed4e] text-[#1a237e] font-semibold text-lg px-10 py-7 transition-all duration-500 hover:scale-105 hover:shadow-2xl shine-effect rounded-xl"
                 asChild
               >
                 <Link to="/produkter">Utforska produkter</Link>
@@ -50,7 +50,7 @@ const Home = ({ addToCart }) => {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="border-2 border-white text-white hover:bg-white hover:text-[#1a237e] font-semibold text-lg px-8 py-6 transition-all duration-300"
+                className="border-2 border-white text-white hover:bg-white hover:text-[#1a237e] font-semibold text-lg px-10 py-7 transition-all duration-500 rounded-xl backdrop-blur-sm"
                 asChild
               >
                 <Link to="/kontakt">Kontakta oss</Link>
