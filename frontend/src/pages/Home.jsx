@@ -61,36 +61,36 @@ const Home = ({ addToCart }) => {
       </section>
 
       {/* Features Section */}
-      <section className="py-16 bg-white">
+      <section className="py-24 bg-white">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <Card className="text-center border-none shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-              <CardContent className="pt-8 pb-6">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-4">
-                  <Truck className="w-8 h-8 text-[#1a237e]" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+            <Card className="text-center border-none shadow-premium hover:shadow-premium-hover transition-all duration-500 hover:-translate-y-3 rounded-2xl">
+              <CardContent className="pt-10 pb-8">
+                <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl mb-6 transition-transform duration-500 hover:scale-110">
+                  <Truck className="w-9 h-9 text-[#1a237e]" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2 text-[#1a237e]">Snabb leverans</h3>
-                <p className="text-gray-600">Vi skickar inom 1-3 arbetsdagar</p>
+                <h3 className="text-2xl font-bold mb-3 text-[#1a237e]">Snabb leverans</h3>
+                <p className="text-gray-600 leading-relaxed">Vi skickar inom 1-3 arbetsdagar</p>
               </CardContent>
             </Card>
             
-            <Card className="text-center border-none shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-              <CardContent className="pt-8 pb-6">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-yellow-100 rounded-full mb-4">
-                  <Shield className="w-8 h-8 text-[#ffd700]" />
+            <Card className="text-center border-none shadow-premium hover:shadow-premium-hover transition-all duration-500 hover:-translate-y-3 rounded-2xl">
+              <CardContent className="pt-10 pb-8">
+                <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-2xl mb-6 transition-transform duration-500 hover:scale-110">
+                  <Shield className="w-9 h-9 text-[#ffd700]" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2 text-[#1a237e]">Hög kvalitet</h3>
-                <p className="text-gray-600">Noggrant utvalda produkter</p>
+                <h3 className="text-2xl font-bold mb-3 text-[#1a237e]">Hög kvalitet</h3>
+                <p className="text-gray-600 leading-relaxed">Noggrant utvalda produkter</p>
               </CardContent>
             </Card>
             
-            <Card className="text-center border-none shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-              <CardContent className="pt-8 pb-6">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
-                  <Package className="w-8 h-8 text-green-600" />
+            <Card className="text-center border-none shadow-premium hover:shadow-premium-hover transition-all duration-500 hover:-translate-y-3 rounded-2xl">
+              <CardContent className="pt-10 pb-8">
+                <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-green-50 to-green-100 rounded-2xl mb-6 transition-transform duration-500 hover:scale-110">
+                  <Package className="w-9 h-9 text-green-600" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2 text-[#1a237e]">Volymrabatter</h3>
-                <p className="text-gray-600">Särskilda priser för stora beställningar</p>
+                <h3 className="text-2xl font-bold mb-3 text-[#1a237e]">Volymrabatter</h3>
+                <p className="text-gray-600 leading-relaxed">Särskilda priser för stora beställningar</p>
               </CardContent>
             </Card>
           </div>
