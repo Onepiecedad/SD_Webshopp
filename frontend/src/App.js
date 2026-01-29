@@ -1,51 +1,59 @@
-import { useEffect } from "react";
-import "@/App.css";
+import { useState } from "react";
+import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import axios from "axios";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import Products from "./pages/Products";
+import ProductDetail from "./pages/ProductDetail";
+import Cart from "./pages/Cart";
+import Contact from "./pages/Contact";
+import { Toaster } from "./components/ui/toaster";
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
+function App() {
+  const [cart, setCart] = useState([]);
 
-const Home = () => {
-  const helloWorldApi = async () => {
-    try {
-      const response = await axios.get(`${API}/`);
-      console.log(response.data.message);
-    } catch (e) {
-      console.error(e, `errored out requesting / api`);
+  const addToCart = (product) => {
+    const existingItemIndex = cart.findIndex(
+      item => item.id === product.id && 
+              item.selectedSize === product.selectedSize && 
+              item.selectedColor === product.selectedColor
+    );
+
+    if (existingItemIndex !== -1) {
+      const newCart = [...cart];
+      newCart[existingItemIndex].quantity += product.quantity || 1;
+      setCart(newCart);
+    } else {
+      setCart([...cart, { ...product, quantity: product.quantity || 1 }]);
     }
   };
 
-  useEffect(() => {
-    helloWorldApi();
-  }, []);
+  const removeFromCart = (index) => {
+    setCart(cart.filter((_, i) => i !== index));
+  };
 
-  return (
-    <div>
-      <header className="App-header">
-        <a
-          className="App-link"
-          href="https://emergent.sh"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src="https://avatars.githubusercontent.com/in/1201222?s=120&u=2686cf91179bbafbc7a71bfbc43004cf9ae1acea&v=4" />
-        </a>
-        <p className="mt-5">Building something incredible ~!</p>
-      </header>
-    </div>
-  );
-};
+  const updateQuantity = (index, quantity) => {
+    const newCart = [...cart];
+    newCart[index].quantity = quantity;
+    setCart(newCart);
+  };
 
-function App() {
+  const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+
   return (
     <div className="App">
       <BrowserRouter>
+        <Header cartCount={cartCount} />
         <Routes>
-          <Route path="/" element={<Home />}>
-            <Route index element={<Home />} />
-          </Route>
+          <Route path="/" element={<Home addToCart={addToCart} />} />
+          <Route path="/produkter" element={<Products addToCart={addToCart} />} />
+          <Route path="/produkt/:id" element={<ProductDetail addToCart={addToCart} />} />
+          <Route path="/varukorg" element={<Cart cart={cart} removeFromCart={removeFromCart} updateQuantity={updateQuantity} />} />
+          <Route path="/kontakt" element={<Contact />} />
         </Routes>
+        <Footer />
+        <Toaster />
       </BrowserRouter>
     </div>
   );
