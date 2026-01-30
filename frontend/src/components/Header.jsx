@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ShoppingCart, Menu, X } from 'lucide-react';
 import { Button } from '../components/ui/button';
@@ -6,7 +6,16 @@ import { Badge } from '../components/ui/badge';
 
 const Header = ({ cartCount }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navLinks = [
     { name: 'Hem', path: '/' },
@@ -17,53 +26,54 @@ const Header = ({ cartCount }) => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-premium border-b border-gray-100">
+    <header className={`sticky top-0 z-50 transition-all duration-500 ${scrolled
+        ? 'glass-header shadow-lg shadow-black/20'
+        : 'bg-transparent'
+      }`}>
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-24">
+        <div className="flex items-center justify-between h-20 lg:h-24">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-4 group">
+          <Link to="/" className="flex items-center gap-3 group">
             <img
               src="https://customer-assets.emergentagent.com/job_99647620-aa0d-48cd-947c-c21a78f050c5/artifacts/ekb3cgx0_a2324df2-849a-44a3-b779-1569a30de3ac.png"
               alt="SD Skåne"
-              className="w-14 h-14 object-contain transition-transform duration-500 group-hover:scale-110 group-hover:rotate-12"
+              className="w-12 h-12 lg:w-14 lg:h-14 object-contain transition-all duration-500 group-hover:scale-110 group-hover:rotate-12 drop-shadow-lg"
             />
             <div>
-              <h1 className="text-2xl font-bold text-[#1a237e] tracking-tight">SD Skånebutiken</h1>
-              <p className="text-xs text-gray-600 font-medium">För ett bättre Sverige</p>
+              <h1 className="text-xl lg:text-2xl font-bold text-white tracking-tight">SD Skånebutiken</h1>
+              <p className="text-xs text-sd-blue-light font-medium hidden sm:block">För ett bättre Sverige</p>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-10">
+          <nav className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`text-lg font-semibold transition-all duration-300 relative group ${
-                  isActive(link.path)
-                    ? 'text-[#1a237e]'
-                    : 'text-gray-600 hover:text-[#1a237e]'
-                }`}
+                className={`text-base lg:text-lg font-semibold transition-all duration-300 relative group ${isActive(link.path)
+                    ? 'text-sd-blue'
+                    : 'text-white/80 hover:text-white'
+                  }`}
               >
                 {link.name}
-                <span className={`absolute -bottom-2 left-0 right-0 h-0.5 bg-[#1a237e] transition-all duration-300 ${
-                  isActive(link.path) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
-                }`}></span>
+                <span className={`absolute -bottom-2 left-0 right-0 h-0.5 bg-gradient-to-r from-sd-blue to-sd-blue-light transition-all duration-300 ${isActive(link.path) ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0 group-hover:opacity-100 group-hover:scale-x-100'
+                  }`}></span>
               </Link>
             ))}
           </nav>
 
           {/* Cart and Mobile Menu Button */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             <Link to="/varukorg">
               <Button
                 variant="ghost"
                 size="icon"
-                className="relative hover:bg-blue-50 transition-all duration-300 w-12 h-12 rounded-xl"
+                className="relative glass-button hover:shadow-glow transition-all duration-300 w-11 h-11 lg:w-12 lg:h-12 rounded-xl"
               >
-                <ShoppingCart className="w-6 h-6 text-[#1a237e]" />
+                <ShoppingCart className="w-5 h-5 lg:w-6 lg:h-6 text-white" />
                 {cartCount > 0 && (
-                  <Badge className="absolute -top-1 -right-1 w-6 h-6 flex items-center justify-center p-0 bg-red-500 hover:bg-red-600 text-white text-xs font-bold border-2 border-white">
+                  <Badge className="absolute -top-1 -right-1 w-5 h-5 lg:w-6 lg:h-6 flex items-center justify-center p-0 bg-sd-yellow hover:bg-sd-yellow-light text-sd-navy text-xs font-bold border-2 border-sd-navy animate-scale-in">
                     {cartCount}
                   </Badge>
                 )}
@@ -74,13 +84,13 @@ const Header = ({ cartCount }) => {
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden hover:bg-blue-50 w-12 h-12 rounded-xl transition-all duration-300"
+              className="md:hidden glass-button hover:shadow-glow w-11 h-11 rounded-xl transition-all duration-300"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               {mobileMenuOpen ? (
-                <X className="w-6 h-6 text-[#1a237e]" />
+                <X className="w-5 h-5 text-white" />
               ) : (
-                <Menu className="w-6 h-6 text-[#1a237e]" />
+                <Menu className="w-5 h-5 text-white" />
               )}
             </Button>
           </div>
@@ -88,18 +98,17 @@ const Header = ({ cartCount }) => {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <nav className="md:hidden py-6 border-t">
-            <div className="flex flex-col gap-3">
+          <nav className="md:hidden py-4 border-t border-white/10 animate-fade-in-up">
+            <div className="flex flex-col gap-2">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
                   to={link.path}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`px-6 py-4 rounded-xl text-lg font-semibold transition-all duration-300 ${
-                    isActive(link.path)
-                      ? 'bg-[#1a237e] text-white shadow-lg'
-                      : 'text-gray-700 hover:bg-gray-100'
-                  }`}
+                  className={`px-5 py-3 rounded-xl text-base font-semibold transition-all duration-300 ${isActive(link.path)
+                      ? 'bg-sd-blue text-white shadow-glow'
+                      : 'text-white/80 hover:bg-white/10 hover:text-white'
+                    }`}
                 >
                   {link.name}
                 </Link>

@@ -3,6 +3,7 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import ParallaxFlowers from "./components/ParallaxFlowers";
 import Home from "./pages/Home";
 import Products from "./pages/Products";
 import ProductDetail from "./pages/ProductDetail";
@@ -15,9 +16,9 @@ function App() {
 
   const addToCart = (product) => {
     const existingItemIndex = cart.findIndex(
-      item => item.id === product.id && 
-              item.selectedSize === product.selectedSize && 
-              item.selectedColor === product.selectedColor
+      item => item.id === product.id &&
+        item.selectedSize === product.selectedSize &&
+        item.selectedColor === product.selectedColor
     );
 
     if (existingItemIndex !== -1) {
@@ -42,18 +43,24 @@ function App() {
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <div className="App">
+    <div className="App min-h-screen bg-sd-navy">
       <BrowserRouter>
-        <Header cartCount={cartCount} />
-        <Routes>
-          <Route path="/" element={<Home addToCart={addToCart} />} />
-          <Route path="/produkter" element={<Products addToCart={addToCart} />} />
-          <Route path="/produkt/:id" element={<ProductDetail addToCart={addToCart} />} />
-          <Route path="/varukorg" element={<Cart cart={cart} removeFromCart={removeFromCart} updateQuantity={updateQuantity} />} />
-          <Route path="/kontakt" element={<Contact />} />
-        </Routes>
-        <Footer />
-        <Toaster />
+        {/* Parallax background with floating Blåsippor */}
+        <ParallaxFlowers />
+
+        {/* Main content */}
+        <div className="relative z-10">
+          <Header cartCount={cartCount} />
+          <Routes>
+            <Route path="/" element={<Home addToCart={addToCart} />} />
+            <Route path="/produkter" element={<Products addToCart={addToCart} />} />
+            <Route path="/produkt/:id" element={<ProductDetail addToCart={addToCart} />} />
+            <Route path="/varukorg" element={<Cart cart={cart} removeFromCart={removeFromCart} updateQuantity={updateQuantity} />} />
+            <Route path="/kontakt" element={<Contact />} />
+          </Routes>
+          <Footer />
+          <Toaster />
+        </div>
       </BrowserRouter>
     </div>
   );
